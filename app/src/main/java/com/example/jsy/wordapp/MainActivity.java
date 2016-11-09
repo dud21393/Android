@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void mOnClick(View v)
     {
-        Intent intent = new Intent(this, Write_Activity.class);
+        Intent intent = new Intent(this,Write_Activity.class);
         startActivity(intent);
     }
 }

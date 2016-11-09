@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="入る"
             android:id="@+id/start"
-            android:onClick="start_click"
+            android:onClick="mOnClick"
             />
 
     </LinearLayout>
