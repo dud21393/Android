@@ -21,7 +21,24 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="単語帳・例文帳名"
+            android:text="単語帳・例文"
+            android:textSize="25dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:id="@+id/Japanese_Word"
+            android:gravity="center"
+            android:hint="単語入力してください"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="韓国語訳"
             android:textSize="25dp"
             android:layout_marginTop="30dp"
             android:gravity="center"
@@ -29,7 +46,10 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
+            android:textSize="15dp"
+            android:id="@+id/Korean_word"
+            android:gravity="center"
+            android:hint="한국어를 입력해주세요"
             />
         <Button
             android:layout_width="wrap_content"
@@ -38,9 +58,8 @@
             android:textSize="25dp"
             android:layout_gravity="right"
             android:layout_marginRight="20dp"
-            android:onClick="Save_click"
+            android:onClick="Word_saveButton"
             />
-
     </LinearLayout>
 
 </LinearLayout>
