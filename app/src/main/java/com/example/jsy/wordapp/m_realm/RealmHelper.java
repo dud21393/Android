@@ -1,6 +1,7 @@
 package com.example.jsy.wordapp.m_realm;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -24,26 +25,61 @@ public class RealmHelper extends Activity{
 
     }
 
-    public void Start_Category(Realm realm,String CategoryName){
+    public void vocabularySave(Realm realm,String categoryName){
 
         realm.beginTransaction();
-        int num = realm.where(Category.class).max("id").intValue() + 1;
+        int num;
+        try {
+            num = realm.where(Category.class).max("CategoryId").intValue()+1;
+        } catch(Exception ex) {
+            num = 1;
+        }
         Category category = realm.createObject(Category.class,num);
-        category.setCategoryName(CategoryName);
+        category.setCategoryName(categoryName);
         realm.commitTransaction();
     }
-    public void Save_Word(Realm realm,String Japanese_Word,String Korean_Word){
+
+    public void saveWord(Realm realm,String japaneseWord,String koreanWord){
+        realm.beginTransaction();
+
+        realm.commitTransaction();
 
     }
 
-    public void IngQuery(Realm realm){
+    public RealmResults<Category> vocabularyList(Realm realm){
 
         RealmResults<Category> ct = realm.where(Category.class).findAll();
-        String result =ct.get(0).getCategoryName();
-        Log.d("three", String.valueOf(ct.size()));
-        Log.d("two",result);
+
+        return ct;
 
     }
+
+    public void ingQuery(Realm realm){
+
+        RealmResults<Category> ct = realm.where(Category.class).findAll();
+        Log.d("num", String.valueOf(ct.size()));
+
+    }
+
+    public void deleteQuery(Realm realm){
+        final RealmResults<Category> ct = realm.where(Category.class).findAll();
+        realm.executeTransaction(new Realm.Transaction(){
+            @Override
+            public void execute(Realm realm){
+                ct.get(0).deleteFromRealm();
+            }
+        });
+    }
+
+    public RealmResults<Sentence> wordList(Realm realm,int categoryId){
+
+        RealmResults<Sentence> st = realm.where(Sentence.class).lessThan("CategoryId", categoryId).findAll();
+
+        return st;
+
+    }
+
+
 
 
 }

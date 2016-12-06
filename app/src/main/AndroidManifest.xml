@@ -14,9 +14,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Write_Activity">
+        <activity android:name=".WriteActivity"></activity>
 
-        </activity>
+        <activity android:name=".VocabularyActivity"></activity>
+        <activity android:name=".VocabularyList"></activity>
+        <activity android:name=".WordList"></activity>
+        <activity android:name=".WordAdd"></activity>
     </application>
 
 </manifest>
