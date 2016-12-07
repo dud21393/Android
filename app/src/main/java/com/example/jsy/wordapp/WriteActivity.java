@@ -47,16 +47,6 @@ public class WriteActivity extends AppCompatActivity{
         startActivity(main_view);
     }
 
-    //日本語と韓国語の単語を、入力して、SaveするMethod。
-    public void wordSaveButton(View v){
-
-        EditText Japanese_Word = (EditText)findViewById(R.id.japaneseWord);
-        EditText Korean_word = (EditText)findViewById(R.id.koreanWord);
-
-        Rh.saveWord(realm,Japanese_Word.getText().toString(),Korean_word.getText().toString());
-
-    }
-
 
 
 }

@@ -44,10 +44,15 @@ public class VocabularyList extends AppCompatActivity {
         vocabularyView(ll);
         sv.addView(ll);
     }
+
+    //단어장삭제
+    //一つの単語帳を削除
     public void vocabularyDelete(int categoryId){
 
     }
 
+    //단어장리스트를 나열
+    //単語帳のリストを羅列
     public void vocabularyView(LinearLayout ll)
     {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -65,6 +70,7 @@ public class VocabularyList extends AppCompatActivity {
             btn.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
 
+                    //WordListClassに移動
                     Intent intent = new Intent(getApplicationContext(),WordList.class);
                     intent.putExtra("categoryId",v.getId());
                     startActivity(intent);

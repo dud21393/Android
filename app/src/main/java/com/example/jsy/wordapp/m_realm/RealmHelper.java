@@ -25,22 +25,32 @@ public class RealmHelper extends Activity{
 
     }
 
-    public void vocabularySave(Realm realm,String categoryName){
+    public void saveVocabulary(Realm realm,String categoryName){
 
         realm.beginTransaction();
-        int num;
+        int categoryId;
         try {
-            num = realm.where(Category.class).max("CategoryId").intValue()+1;
+            categoryId = realm.where(Category.class).max("CategoryId").intValue()+1;
         } catch(Exception ex) {
-            num = 1;
+            categoryId = 1;
         }
-        Category category = realm.createObject(Category.class,num);
+        Category category = realm.createObject(Category.class,categoryId);
         category.setCategoryName(categoryName);
         realm.commitTransaction();
     }
 
-    public void saveWord(Realm realm,String japaneseWord,String koreanWord){
+    public void saveWord(Realm realm,String japaneseWord,String koreanWord,int categoryId){
         realm.beginTransaction();
+        int sentenceId;
+        try {
+            sentenceId = realm.where(Category.class).max("SentenceId").intValue()+1;
+        } catch(Exception ex) {
+            sentenceId = 1;
+        }
+        Sentence sentence = realm.createObject(Sentence.class,sentenceId);
+        sentence.setCategoryId(categoryId);
+        sentence.setKoreanSentence(koreanWord);
+        sentence.setJapaneseSentence(japaneseWord);
 
         realm.commitTransaction();
 
@@ -73,13 +83,10 @@ public class RealmHelper extends Activity{
 
     public RealmResults<Sentence> wordList(Realm realm,int categoryId){
 
-        RealmResults<Sentence> st = realm.where(Sentence.class).lessThan("CategoryId", categoryId).findAll();
+        RealmResults<Sentence> st = realm.where(Sentence.class).equalTo("CategoryId", categoryId).findAll();
 
         return st;
 
     }
-
-
-
 
 }

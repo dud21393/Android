@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import com.example.jsy.wordapp.m_realm.Category;
 import com.example.jsy.wordapp.m_realm.RealmHelper;
@@ -40,18 +41,20 @@ public class WordList extends AppCompatActivity {
 
     }
 
+    //단어 리스트를 불러와서 나열
+    //単語リストを呼んできて羅列
     public void wordList(){
-
         result  = Rh.wordList(realm,categoryId);
-
+        Log.d("SenSize", String.valueOf(result.size()));
         for(int iCount=0; iCount<result.size(); iCount++){
 
         }
     }
 
-    public void wordAdd(){
-
-        Intent intent = new Intent(getApplicationContext(),WordAdd.class);
+    //+를 눌렀을때 단어추가화면으로 넘어감
+    //＋をクリクした時、WordAddに移動
+    public void wordAdd(View v){
+        Intent intent = new Intent(this,WordAdd.class);
         intent.putExtra("categoryId",categoryId);
         startActivity(intent);
 

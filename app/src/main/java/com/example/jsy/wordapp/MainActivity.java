@@ -17,12 +17,16 @@ public class MainActivity extends AppCompatActivity{
         Realm.init(this);
     }
 
-    public void vocabularySave(View v)
+    //단어장저장화면으로이동
+    //単語帳のsave画面に移動
+    public void saveVocabulary(View v)
     {
         Intent intent = new Intent(this,VocabularyActivity.class);
         startActivity(intent);
     }
 
+    //단어장리스트로 이동
+    //単語帳のリストに移動
     public void vocabularyList(View v)
     {
         Intent intent = new Intent(this,VocabularyList.class);

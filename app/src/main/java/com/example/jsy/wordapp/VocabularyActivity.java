@@ -26,10 +26,12 @@ public class VocabularyActivity extends AppCompatActivity {
         realm = Realm.getDefaultInstance();
     }
 
+    //단어장저장
+    //単語帳save
     public void vocabularySave(View v){
         rh.ingQuery(realm);
         EditText vbName = (EditText)findViewById(R.id.vocabularyName);
-        rh.vocabularySave(realm,vbName.getText().toString());
+        rh.saveVocabulary(realm,vbName.getText().toString());
 
     }
 

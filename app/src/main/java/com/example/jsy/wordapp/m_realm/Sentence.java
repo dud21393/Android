@@ -1,5 +1,6 @@
 package com.example.jsy.wordapp.m_realm;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -11,18 +12,18 @@ public class Sentence extends RealmObject {
 
     @PrimaryKey
     private int SentenceId;
-    private int CategoryId;
-
+    private RealmList<Category> CategoryId;
     private String KoreanSentence;
     private String JapaneseSentence;
+
+
+    public RealmList<Category> getCategoryId() { return CategoryId; }
+
+    public void setCategoryId(RealmList<Category> categoryId) { CategoryId = categoryId; }
 
     public int getSentenceId() { return SentenceId;  }
 
     public void setSentenceId(int sentenceId) {SentenceId = sentenceId; }
-
-    public int getCategoryId() { return CategoryId; }
-
-    public void setCategoryId(int categoryId) { CategoryId = categoryId; }
 
     public String getKoreanSentence() { return KoreanSentence; }
 
