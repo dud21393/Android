@@ -35,7 +35,7 @@ public class WordList extends AppCompatActivity {
         categoryId = intent.getIntExtra("categoryId",9999);
         Log.d("category", ""+categoryId);
 
-        wordList();
+//        wordList();
 
         setContentView(R.layout.word_list);
 
@@ -57,7 +57,12 @@ public class WordList extends AppCompatActivity {
         Intent intent = new Intent(this,WordAdd.class);
         intent.putExtra("categoryId",categoryId);
         startActivity(intent);
+    }
 
+    //Main画面に戻る時、使う。
+    public void backClick(View v){
+        Intent mainView = new Intent(this,MainActivity.class);
+        startActivity(mainView);
     }
 
 

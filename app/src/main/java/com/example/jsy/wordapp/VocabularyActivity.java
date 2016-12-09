@@ -24,6 +24,7 @@ public class VocabularyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vocabulary);
         realm = Realm.getDefaultInstance();
+//        rh.deleteQuery(realm);
     }
 
     //단어장저장

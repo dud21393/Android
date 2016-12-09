@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity{
 
     //단어장저장화면으로이동
     //単語帳のsave画面に移動
-    public void saveVocabulary(View v)
+    public void vocabularyMove(View v)
     {
         Intent intent = new Intent(this,VocabularyActivity.class);
         startActivity(intent);

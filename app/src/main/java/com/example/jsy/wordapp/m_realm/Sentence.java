@@ -3,6 +3,7 @@ package com.example.jsy.wordapp.m_realm;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
 /**
  * Created by jsy on 2016-11-09.
@@ -12,14 +13,12 @@ public class Sentence extends RealmObject {
 
     @PrimaryKey
     private int SentenceId;
-    private RealmList<Category> CategoryId;
+    private int CategoryId;
+
+    @Required
     private String KoreanSentence;
     private String JapaneseSentence;
 
-
-    public RealmList<Category> getCategoryId() { return CategoryId; }
-
-    public void setCategoryId(RealmList<Category> categoryId) { CategoryId = categoryId; }
 
     public int getSentenceId() { return SentenceId;  }
 
@@ -32,4 +31,6 @@ public class Sentence extends RealmObject {
     public String getJapaneseSentence() {return JapaneseSentence;}
 
     public void setJapaneseSentence(String japaneseSentence) {JapaneseSentence = japaneseSentence;}
+
+
 }

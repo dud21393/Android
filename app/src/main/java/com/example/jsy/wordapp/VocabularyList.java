@@ -32,7 +32,6 @@ public class VocabularyList extends AppCompatActivity {
 
         setContentView(R.layout.vocabulary_list);
 
-
         realm = Realm.getDefaultInstance();
         result = Rh.vocabularyList(realm);
 
@@ -66,6 +65,8 @@ public class VocabularyList extends AppCompatActivity {
             btn.setLayoutParams(params);
             btn.setBackgroundColor(Color.YELLOW);
             btn.setId(result.get(iCount).getCategoryId());
+            Log.d("one", String.valueOf(result.get(iCount).getCategoryId()));
+            Log.d("one", result.get(iCount).getCategoryName());
 
             btn.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){

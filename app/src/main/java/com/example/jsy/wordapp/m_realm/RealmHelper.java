@@ -39,7 +39,8 @@ public class RealmHelper extends Activity{
         realm.commitTransaction();
     }
 
-    public void saveWord(Realm realm,String japaneseWord,String koreanWord,int categoryId){
+    public void saveWord(Realm realm,  String japaneseWord,  String koreanWord,  int categoryId){
+
         realm.beginTransaction();
         int sentenceId;
         try {
@@ -47,8 +48,9 @@ public class RealmHelper extends Activity{
         } catch(Exception ex) {
             sentenceId = 1;
         }
+        Category category = realm.createObject(Category.class);
+
         Sentence sentence = realm.createObject(Sentence.class,sentenceId);
-        sentence.setCategoryId(categoryId);
         sentence.setKoreanSentence(koreanWord);
         sentence.setJapaneseSentence(japaneseWord);
 
@@ -77,6 +79,13 @@ public class RealmHelper extends Activity{
             @Override
             public void execute(Realm realm){
                 ct.get(0).deleteFromRealm();
+            }
+        });
+        final RealmResults<Sentence> st = realm.where(Sentence.class).findAll();
+        realm.executeTransaction(new Realm.Transaction(){
+            @Override
+            public void execute(Realm realm){
+                st.get(0).deleteFromRealm();
             }
         });
     }
