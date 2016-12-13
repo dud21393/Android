@@ -13,7 +13,6 @@ public class Sentence extends RealmObject {
 
     @PrimaryKey
     private int SentenceId;
-    private int CategoryId;
 
     @Required
     private String KoreanSentence;

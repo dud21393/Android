@@ -1,13 +1,6 @@
 package com.example.jsy.wordapp.m_realm;
 
-import android.app.Activity;
-import android.app.Notification;
-import android.os.Bundle;
 import android.util.Log;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.example.jsy.wordapp.R;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -16,14 +9,7 @@ import io.realm.RealmResults;
  * Created by jsy on 2016-11-10.
  */
 
-public class RealmHelper extends Activity{
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-
-        super.onCreate(savedInstanceState);
-
-    }
+public class RealmHelper {
 
     public void saveVocabulary(Realm realm,String categoryName){
 
@@ -44,15 +30,22 @@ public class RealmHelper extends Activity{
         realm.beginTransaction();
         int sentenceId;
         try {
-            sentenceId = realm.where(Category.class).max("SentenceId").intValue()+1;
+            sentenceId = realm.where(Sentence.class).max("SentenceId").intValue()+1;
         } catch(Exception ex) {
             sentenceId = 1;
         }
-        Category category = realm.createObject(Category.class);
+
+        Log.d("sentenceId", String.valueOf(sentenceId));
+
+        Category category = realm.where(Category.class).equalTo("CategoryId",categoryId).findFirst();
+
+        Log.d("cc",String.valueOf(category.getCategoryId()));
+
 
         Sentence sentence = realm.createObject(Sentence.class,sentenceId);
         sentence.setKoreanSentence(koreanWord);
         sentence.setJapaneseSentence(japaneseWord);
+        category.getSentences().add(sentence);
 
         realm.commitTransaction();
 
@@ -90,11 +83,13 @@ public class RealmHelper extends Activity{
         });
     }
 
-    public RealmResults<Sentence> wordList(Realm realm,int categoryId){
+    public RealmResults<Category> wordList(Realm realm,int categoryId){
+        
+        RealmResults<Category> ct = realm.where(Category.class)
+                .equalTo("CategoryId",categoryId)
+                .findAll();
 
-        RealmResults<Sentence> st = realm.where(Sentence.class).equalTo("CategoryId", categoryId).findAll();
-
-        return st;
+        return ct;
 
     }
 
