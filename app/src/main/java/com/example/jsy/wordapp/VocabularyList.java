@@ -7,8 +7,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.example.jsy.wordapp.m_realm.Category;
@@ -25,6 +28,11 @@ public class VocabularyList extends AppCompatActivity {
     Realm realm;
     RealmHelper Rh = new RealmHelper();
     private RealmResults<Category> result;
+    ListView lv;
+
+    String[] items;
+    int[] categoryIds;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,13 +43,8 @@ public class VocabularyList extends AppCompatActivity {
         realm = Realm.getDefaultInstance();
         result = Rh.vocabularyList(realm);
 
-        ScrollView sv = (ScrollView)findViewById(R.id.scrollView);
+        vocabularyList();
 
-        LinearLayout ll = new LinearLayout(this);
-        ll.setOrientation(LinearLayout.VERTICAL);
-
-        vocabularyView(ll);
-        sv.addView(ll);
     }
 
     //단어장삭제
@@ -50,38 +53,35 @@ public class VocabularyList extends AppCompatActivity {
 
     }
 
-    //단어장리스트를 나열
-    //単語帳のリストを羅列
-    public void vocabularyView(LinearLayout ll)
-    {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.topMargin = 10;
+    public void vocabularyList(){
+        int categoryNum = result.size();
 
-        for(int iCount=0; iCount<result.size(); iCount++){
-            Button btn = new Button(this);
-            btn.setText(result.get(iCount).getCategoryName());
-            btn.setLayoutParams(params);
-            btn.setBackgroundColor(Color.YELLOW);
-            btn.setId(result.get(iCount).getCategoryId());
+        items = new String[categoryNum];
+        categoryIds = new int[categoryNum];
 
-            Log.d("one", String.valueOf(result.get(iCount).getCategoryId()));
-            Log.d("one", result.get(iCount).getCategoryName());
-
-            btn.setOnClickListener(new View.OnClickListener(){
-                public void onClick(View v){
-
-                    //WordListClassに移動
-                    Intent intent = new Intent(getApplicationContext(),WordList.class);
-                    intent.putExtra("categoryId",v.getId());
-                    startActivity(intent);
-                    Log.d("Click",""+v.getId());
-                }
-            });
-
-            ll.addView(btn);
+        for(int iCount=0; iCount<categoryNum; iCount++)
+        {
+            items[iCount] = result.get(iCount).getCategoryName();
+            categoryIds[iCount] = result.get(iCount).getCategoryId();
         }
+
+        lv = (ListView)findViewById(R.id.listView);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,items);
+        lv.setAdapter(adapter);
+        registerForContextMenu(lv);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //WordListClassに移動
+                Intent intent = new Intent(getApplicationContext(),WordList.class);
+                intent.putExtra("categoryId",categoryIds[position]);
+                startActivity(intent);
+            }
+        }
+        );
     }
 
     //Main画面に戻る時、使う。

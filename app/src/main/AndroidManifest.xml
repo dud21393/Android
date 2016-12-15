@@ -20,6 +20,7 @@
         <activity android:name=".VocabularyList"></activity>
         <activity android:name=".WordList"></activity>
         <activity android:name=".WordAdd"></activity>
+        <activity android:name=".WordTest"></activity>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.jsy.wordapp.m_realm.RealmHelper;
 import com.example.jsy.wordapp.m_realm.Sentence;
@@ -33,14 +34,23 @@ public class WordAdd extends AppCompatActivity {
     //日本語と韓国語の単語を、入力して、SaveするMethod。
     public void wordSaveButton(View v){
         Intent intent = getIntent();
-        int categoryId = intent.getIntExtra("categoryId",9999);
+
+        int categoryId = intent.getIntExtra("categoryId",999999999);
 
         EditText Japanese_Word = (EditText)findViewById(R.id.japaneseWord);
         EditText Korean_word = (EditText)findViewById(R.id.koreanWord);
 
-
-        Rh.saveWord(realm,Japanese_Word.getText().toString(),Korean_word.getText().toString(),categoryId);
-
+        if(categoryId != 999999999) {
+            Rh.saveWord(realm, Japanese_Word.getText().toString(), Korean_word.getText().toString(), categoryId);
+            Toast.makeText(WordAdd.this, "Saveしました。", Toast.LENGTH_SHORT).show();
+            intent = new Intent(this,WordList.class);
+            intent.putExtra("categoryId",categoryId);
+            startActivity(intent);
+        }else{
+            Toast.makeText(WordAdd.this, "Errorができました。", Toast.LENGTH_SHORT).show();
+            intent = new Intent(this,VocabularyList.class);
+            startActivity(intent);
+        }
     }
 
     //Main画面に戻る時、使う。

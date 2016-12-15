@@ -34,6 +34,8 @@ public class VocabularyActivity extends AppCompatActivity {
         EditText vbName = (EditText)findViewById(R.id.vocabularyName);
         rh.saveVocabulary(realm,vbName.getText().toString());
 
+        Intent vocalbularyList = new Intent(this,VocabularyList.class);
+        startActivity(vocalbularyList);
     }
 
     //Main画面に戻る時、使う。
