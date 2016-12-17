@@ -1,24 +1,14 @@
 package com.example.jsy.wordapp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.example.jsy.wordapp.m_realm.Category;
 import com.example.jsy.wordapp.m_realm.RealmHelper;
-import com.example.jsy.wordapp.m_realm.Sentence;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -45,45 +35,32 @@ public class WordList extends AppCompatActivity {
         categoryId = intent.getIntExtra("categoryId",999999999);
 
         if(categoryId != 999999999) {
-            LinearLayout ll = (LinearLayout) findViewById(R.id.layoutView);
-            wordList(ll);
+            wordList();
+        }else{
+
         }
     }
 
     //단어 리스트를 불러와서 나열
     //単語リストを呼んできて羅列
-    public void wordList(LinearLayout ll){
+    public void wordList(){
+
         result  = Rh.wordList(realm,categoryId);
         int num = result.get(0).getSentences().size();
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.bottomMargin = 30;
+        ListView listView;
+        WordAdapter adapter = new WordAdapter();
 
-        for(int iCount=0; iCount<num; iCount++){
-            LinearLayout layout = new LinearLayout(this);
-            layout.setOrientation(LinearLayout.VERTICAL);
-            layout.setBackgroundColor(Color.WHITE);
-            layout.setLayoutParams(params);
+        listView = (ListView) findViewById(R.id.wordList);
 
-
-            TextView tv = new TextView(this);
-            tv.setText(result.get(0).getSentences().get(iCount).getJapaneseSentence());
-            tv.setTextSize(20);
-            tv.setGravity(Gravity.LEFT);
-
-            TextView tv2 = new TextView(this);
-            tv2.setText(result.get(0).getSentences().get(iCount).getKoreanSentence());
-            tv2.setTextSize(20);
-            tv2.setGravity(Gravity.RIGHT);
-
-            layout.addView(tv);
-            layout.addView(tv2);
-
-            ll.addView(layout);
+        for(int iCount=0; iCount<num; iCount++) {
+            String japenSentence = result.get(0).getSentences().get(iCount).getJapaneseSentence();
+            String koreanSentence = result.get(0).getSentences().get(iCount).getKoreanSentence();
+            adapter.addItem(japenSentence,koreanSentence);
         }
-    }
+
+        listView.setAdapter(adapter);
+        }
 
     //+를 눌렀을때 단어추가화면으로 넘어감
     //＋をクリクした時、WordAddに移動
@@ -101,10 +78,10 @@ public class WordList extends AppCompatActivity {
 
     //TEST버튼을 눌렀을때 WordTest로 이동
     //テストボタンをクリクした時、WordTestに移動
-    public void testButton(View v){
-        Intent testButton = new Intent(this,WordTest.class);
-        testButton.putExtra("categoryId",categoryId);
-        startActivity(testButton);
+    public void testClick(View v){
+        Intent wordTest = new Intent(this,WordTest.class);
+        wordTest.putExtra("categoryId",categoryId);
+        startActivity(wordTest);
     }
 
 

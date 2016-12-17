@@ -70,11 +70,9 @@ public class VocabularyList extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,items);
         lv.setAdapter(adapter);
         registerForContextMenu(lv);
-
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 //WordListClassに移動
                 Intent intent = new Intent(getApplicationContext(),WordList.class);
                 intent.putExtra("categoryId",categoryIds[position]);

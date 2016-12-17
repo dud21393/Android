@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.jsy.wordapp.m_realm.RealmHelper;
 
@@ -30,10 +31,9 @@ public class VocabularyActivity extends AppCompatActivity {
     //단어장저장
     //単語帳save
     public void vocabularySave(View v){
-        rh.ingQuery(realm);
         EditText vbName = (EditText)findViewById(R.id.vocabularyName);
         rh.saveVocabulary(realm,vbName.getText().toString());
-
+        Toast.makeText(VocabularyActivity.this, "Saveしました。", Toast.LENGTH_SHORT).show();
         Intent vocalbularyList = new Intent(this,VocabularyList.class);
         startActivity(vocalbularyList);
     }
