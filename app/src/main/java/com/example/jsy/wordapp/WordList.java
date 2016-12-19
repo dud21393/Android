@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.jsy.wordapp.m_realm.Category;
 import com.example.jsy.wordapp.m_realm.RealmHelper;
+
+import org.w3c.dom.Text;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -26,7 +30,6 @@ public class WordList extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.word_list);
 
         realm = Realm.getDefaultInstance();
@@ -49,17 +52,21 @@ public class WordList extends AppCompatActivity {
         int num = result.get(0).getSentences().size();
 
         ListView listView;
-        WordAdapter adapter = new WordAdapter();
-
+        TextView empty = (TextView) findViewById(R.id.emptyText);
         listView = (ListView) findViewById(R.id.wordList);
+        listView.setEmptyView(empty);
 
-        for(int iCount=0; iCount<num; iCount++) {
-            String japenSentence = result.get(0).getSentences().get(iCount).getJapaneseSentence();
-            String koreanSentence = result.get(0).getSentences().get(iCount).getKoreanSentence();
-            adapter.addItem(japenSentence,koreanSentence);
+        if(num > 0) {
+            WordAdapter adapter = new WordAdapter();
+            for (int iCount = 0; iCount < num; iCount++) {
+                String japenSentence = result.get(0).getSentences().get(iCount).getJapaneseSentence();
+                String koreanSentence = result.get(0).getSentences().get(iCount).getKoreanSentence();
+                adapter.addItem(japenSentence, koreanSentence);
+            }
+            listView.setAdapter(adapter);
+        }else{
+            empty.setVisibility(View.VISIBLE);
         }
-
-        listView.setAdapter(adapter);
         }
 
     //+를 눌렀을때 단어추가화면으로 넘어감
