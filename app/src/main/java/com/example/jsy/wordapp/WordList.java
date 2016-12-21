@@ -1,18 +1,23 @@
 package com.example.jsy.wordapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.jsy.wordapp.recycle.RecyclerAdapter;
+import com.example.jsy.wordapp.recycle.WordItemList;
 import com.example.jsy.wordapp.m_realm.Category;
 import com.example.jsy.wordapp.m_realm.RealmHelper;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -22,10 +27,12 @@ import io.realm.RealmResults;
  */
 
 public class WordList extends AppCompatActivity {
+    Context mainContext;
     Realm realm;
     RealmHelper Rh = new RealmHelper();
     private RealmResults<Category> result;
     int categoryId;
+    List<Integer> count = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,39 +42,52 @@ public class WordList extends AppCompatActivity {
         realm = Realm.getDefaultInstance();
 
         Intent intent = getIntent();
-        categoryId = intent.getIntExtra("categoryId",999999999);
+        categoryId = intent.getIntExtra("categoryId", 999999999);
 
-        if(categoryId != 999999999) {
+        if (categoryId != 999999999) {
             wordList();
-        }else{
+        } else {
 
         }
     }
 
     //단어 리스트를 불러와서 나열
     //単語リストを呼んできて羅列
-    public void wordList(){
+    public void wordList() {
 
-        result  = Rh.wordList(realm,categoryId);
+        result = Rh.wordList(realm, categoryId);
         int num = result.get(0).getSentences().size();
 
-        ListView listView;
-        TextView empty = (TextView) findViewById(R.id.emptyText);
-        listView = (ListView) findViewById(R.id.wordList);
-        listView.setEmptyView(empty);
+        RecyclerView rv;
 
-        if(num > 0) {
-            WordAdapter adapter = new WordAdapter();
+        TextView empty = (TextView) findViewById(R.id.emptyText);
+
+        rv = (RecyclerView) findViewById(R.id.wordList);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(llm);
+        rv.setItemAnimator(new DefaultItemAnimator());
+
+        List<WordItemList> list = new ArrayList<WordItemList>();
+
+        if (num > 0) {
             for (int iCount = 0; iCount < num; iCount++) {
+                WordItemList wordItemList = new WordItemList();
                 String japenSentence = result.get(0).getSentences().get(iCount).getJapaneseSentence();
                 String koreanSentence = result.get(0).getSentences().get(iCount).getKoreanSentence();
-                adapter.addItem(japenSentence, koreanSentence);
+
+                wordItemList.setJapan(japenSentence);
+                wordItemList.setKorean(koreanSentence);
+
+                list.add(wordItemList);
             }
-            listView.setAdapter(adapter);
+            rv.setAdapter(new RecyclerAdapter(list, R.layout.list_view));
+            rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         }else{
+            rv.setVisibility(View.GONE);
             empty.setVisibility(View.VISIBLE);
         }
-        }
+    }
 
     //+를 눌렀을때 단어추가화면으로 넘어감
     //＋をクリクした時、WordAddに移動
