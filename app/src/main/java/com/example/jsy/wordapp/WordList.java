@@ -29,7 +29,7 @@ import io.realm.RealmResults;
 public class WordList extends AppCompatActivity {
     Context mainContext;
     Realm realm;
-    RealmHelper Rh = new RealmHelper();
+    RealmHelper rh = new RealmHelper();
     private RealmResults<Category> result;
     int categoryId;
     List<Integer> count = null;
@@ -55,7 +55,7 @@ public class WordList extends AppCompatActivity {
     //単語リストを呼んできて羅列
     public void wordList() {
 
-        result = Rh.wordList(realm, categoryId);
+        result = rh.wordList(realm, categoryId);
         int num = result.get(0).getSentences().size();
 
         RecyclerView rv;

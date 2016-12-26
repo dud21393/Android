@@ -32,27 +32,29 @@ public class WordAdd extends AppCompatActivity {
     }
 
     //日本語と韓国語の単語を、入力して、SaveするMethod。
-    public void wordSaveButton(View v){
+    public void wordSaveButton(View v) {
         Intent intent = getIntent();
 
-        int categoryId = intent.getIntExtra("categoryId",999999999);
+        int categoryId = intent.getIntExtra("categoryId", 999999999);
 
-        EditText Japanese_Word = (EditText)findViewById(R.id.japaneseWord);
-        EditText Korean_word = (EditText)findViewById(R.id.koreanWord);
-
-        if(categoryId != 999999999) {
-            Rh.saveWord(realm, Japanese_Word.getText().toString(), Korean_word.getText().toString(), categoryId);
-            Toast.makeText(WordAdd.this, "Saveしました。", Toast.LENGTH_SHORT).show();
-            intent = new Intent(this,WordList.class);
-            intent.putExtra("categoryId",categoryId);
-            startActivity(intent);
+        EditText Japanese_Word = (EditText) findViewById(R.id.japaneseWord);
+        EditText Korean_word = (EditText) findViewById(R.id.koreanWord);
+        if (Japanese_Word.getText().toString().equals("") || Korean_word.getText().toString().equals("")) {
+            Toast.makeText(WordAdd.this,"ちゃんと書いてください。",Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(WordAdd.this, "Errorができました。", Toast.LENGTH_SHORT).show();
-            intent = new Intent(this,VocabularyList.class);
-            startActivity(intent);
+            if (categoryId != 999999999) {
+                Rh.saveWord(realm, Japanese_Word.getText().toString(), Korean_word.getText().toString(), categoryId);
+                Toast.makeText(WordAdd.this, "Saveしました。", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, WordList.class);
+                intent.putExtra("categoryId", categoryId);
+                startActivity(intent);
+            } else {
+                Toast.makeText(WordAdd.this, "Errorができました。", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, VocabularyList.class);
+                startActivity(intent);
+            }
         }
     }
-
     //Main画面に戻る時、使う。
     public void backClick(View v){
         Intent mainView = new Intent(this,MainActivity.class);

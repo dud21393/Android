@@ -16,7 +16,7 @@
         </activity>
         <activity android:name=".WriteActivity"></activity>
 
-        <activity android:name=".VocabularyActivity"></activity>
+        <activity android:name=".VocabularyAdd"></activity>
         <activity android:name=".VocabularyList"></activity>
         <activity android:name=".WordList"></activity>
         <activity android:name=".WordAdd"></activity>

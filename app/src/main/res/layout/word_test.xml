@@ -33,19 +33,11 @@
         >
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
+            android:layout_height="100dp"
             android:id="@+id/textView"
+            android:gravity="center"
             android:textSize="20dp"
             />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:gravity="center"
-            android:id="@+id/answer"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -62,7 +54,7 @@
             android:layout_alignParentTop="true"
             android:text="Prev"
             android:background="@android:color/white"
-            android:onClick="prevClick"
+            android:id="@+id/preClick"
             />
 
         <Button
@@ -73,7 +65,7 @@
             android:layout_gravity="right"
             android:text="Next"
             android:background="@android:color/white"
-            android:onClick="nextClick"
+            android:id="@+id/nextClick"
             />
 
     </RelativeLayout>

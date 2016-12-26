@@ -15,7 +15,7 @@ import io.realm.Realm;
  * Created by jsy on 2016-11-21.
  */
 
-public class VocabularyActivity extends AppCompatActivity {
+public class VocabularyAdd extends AppCompatActivity {
 
     Realm realm;
     RealmHelper rh = new RealmHelper();
@@ -32,10 +32,14 @@ public class VocabularyActivity extends AppCompatActivity {
     //単語帳save
     public void vocabularySave(View v){
         EditText vbName = (EditText)findViewById(R.id.vocabularyName);
-        rh.saveVocabulary(realm,vbName.getText().toString());
-        Toast.makeText(VocabularyActivity.this, "Saveしました。", Toast.LENGTH_SHORT).show();
-        Intent vocalbularyList = new Intent(this,VocabularyList.class);
-        startActivity(vocalbularyList);
+        if(vbName.getText().toString().equals("")){
+            Toast.makeText(VocabularyAdd.this,"ちゃんと書いてください。",Toast.LENGTH_SHORT).show();
+        }else {
+            rh.saveVocabulary(realm, vbName.getText().toString());
+            Toast.makeText(VocabularyAdd.this, "Saveしました。", Toast.LENGTH_SHORT).show();
+            Intent vocalbularyList = new Intent(this, VocabularyList.class);
+            startActivity(vocalbularyList);
+        }
     }
 
     //Main画面に戻る時、使う。
