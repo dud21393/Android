@@ -46,8 +46,6 @@ public class WordList extends AppCompatActivity {
 
         if (categoryId != 999999999) {
             wordList();
-        } else {
-
         }
     }
 

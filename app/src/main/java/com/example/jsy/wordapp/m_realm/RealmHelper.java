@@ -1,13 +1,10 @@
 package com.example.jsy.wordapp.m_realm;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-
-/**
- * Created by jsy on 2016-11-10.
- */
 
 public class RealmHelper {
 
@@ -20,15 +17,27 @@ public class RealmHelper {
         } catch(Exception ex) {
             categoryId = 1;
         }
-        Category category = realm.createObject(Category.class,categoryId);
-        category.setCategoryName(categoryName);
+
+        Log.d("categoryId", String.valueOf(realm.where(Category.class).max("CategoryId").intValue()));
+
+        //Category Insertが失敗した時。
+        try {
+            Category category = realm.createObject(Category.class, categoryId);
+            category.setCategoryName(categoryName);
+        }catch (Exception ex){
+            CategoryInsert ci = new CategoryInsert();
+            ci.foo();
+        }
+
         realm.commitTransaction();
+
     }
 
     public void saveWord(Realm realm,  String japaneseWord,  String koreanWord,  int categoryId){
 
         realm.beginTransaction();
         int sentenceId;
+
         try {
             sentenceId = realm.where(Sentence.class).max("SentenceId").intValue()+1;
         } catch(Exception ex) {
@@ -41,10 +50,11 @@ public class RealmHelper {
 
         Log.d("cc",String.valueOf(category.getCategoryId()));
 
-
         Sentence sentence = realm.createObject(Sentence.class,sentenceId);
+
         sentence.setKoreanSentence(koreanWord);
         sentence.setJapaneseSentence(japaneseWord);
+
         category.getSentences().add(sentence);
 
         realm.commitTransaction();
@@ -92,5 +102,4 @@ public class RealmHelper {
         return ct;
 
     }
-
 }
