@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:weightSum="1">
+<layout>
+    <data>
+        <variable
+            name="main"
+            type="com.example.jsy.wordapp.bind.MainBind" />
+        <variable
+            name="handlers"
+            type="com.example.jsy.wordapp.bind.MainHandler" />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-    <ImageView
-        android:layout_width="180dp"
-        android:layout_height="200dp"
-        android:background="@drawable/word" />
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="200dp"
+            android:background="@drawable/word" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:onClick="vocabularyMove"
-        android:text="単語帳作る" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:id="@+id/vocabularySave"
+            android:onClick="@{handlers.vocabularySave}"
+            android:text="@{main.vocabularySave}"
+            />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="vocabularyList"
-        android:text="単語帳見る" />
-</LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/vocabularyLIst"
+            android:onClick="@{handlers.vocabularyList}"
+            android:text="@{main.vocabularySee}"/>
+    </LinearLayout>
+</layout>

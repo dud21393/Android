@@ -3,14 +3,11 @@ package com.example.jsy.wordapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.jsy.wordapp.m_realm.Category;
 import com.example.jsy.wordapp.m_realm.RealmHelper;
@@ -46,11 +43,13 @@ public class WordTest extends AppCompatActivity {
         test();
     }
 
+    //Test List作る。
     public void test() {
         result = rh.wordList(realm, categoryId);
         int num = result.get(0).getSentences().size();
         count = 0;
 
+        //Vectorを利用して、配列を作る。
         vector = new Vector<String>();
 
         for (int iCount = 0; iCount < num; iCount++) {

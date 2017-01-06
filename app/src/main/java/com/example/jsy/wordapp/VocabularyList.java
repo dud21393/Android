@@ -1,18 +1,13 @@
 package com.example.jsy.wordapp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 
 import com.example.jsy.wordapp.m_realm.Category;
 import com.example.jsy.wordapp.m_realm.RealmHelper;
@@ -44,12 +39,6 @@ public class VocabularyList extends AppCompatActivity {
         result = Rh.vocabularyList(realm);
 
         vocabularyList();
-
-    }
-
-    //단어장삭제
-    //一つの単語帳を削除
-    public void vocabularyDelete(int categoryId){
 
     }
 

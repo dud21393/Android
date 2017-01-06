@@ -1,9 +1,12 @@
 package com.example.jsy.wordapp;
 
-import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+
+import com.example.jsy.wordapp.bind.MainHandler;
+import com.example.jsy.wordapp.bind.MainBind;
+import com.example.jsy.wordapp.databinding.MainActivityBinding;
 
 import io.realm.Realm;
 
@@ -12,24 +15,16 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        MainActivityBinding binding = DataBindingUtil.setContentView(this,R.layout.main_activity);
+
+        MainBind mainBinding = new MainBind("単語帳作る","単語帳見る");
+        MainHandler mainHandler = new MainHandler();
+
+        binding.setMain(mainBinding);
+        binding.setHandlers(mainHandler);
+
         Realm.init(this);
-    }
 
-    //단어장저장화면으로이동
-    //単語帳のsave画面に移動
-    public void vocabularyMove(View v)
-    {
-        Intent intent = new Intent(this,VocabularyAdd.class);
-        startActivity(intent);
-    }
-
-    //단어장리스트로 이동
-    //単語帳のリストに移動
-    public void vocabularyList(View v)
-    {
-        Intent intent = new Intent(this,VocabularyList.class);
-        startActivity(intent);
     }
 
 }

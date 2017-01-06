@@ -44,18 +44,16 @@ public class RealmHelper {
             sentenceId = 1;
         }
 
-        Log.d("sentenceId", String.valueOf(sentenceId));
-
-        Category category = realm.where(Category.class).equalTo("CategoryId",categoryId).findFirst();
-
-        Log.d("cc",String.valueOf(category.getCategoryId()));
-
-        Sentence sentence = realm.createObject(Sentence.class,sentenceId);
-
-        sentence.setKoreanSentence(koreanWord);
-        sentence.setJapaneseSentence(japaneseWord);
-
-        category.getSentences().add(sentence);
+        try {
+            Category category = realm.where(Category.class).equalTo("CategoryId", categoryId).findFirst();
+            Sentence sentence = realm.createObject(Sentence.class, sentenceId);
+            sentence.setKoreanSentence(koreanWord);
+            sentence.setJapaneseSentence(japaneseWord);
+            category.getSentences().add(sentence);
+        }catch (Exception ex){
+            SentenceInsert si = new SentenceInsert();
+            si.foo();
+        }
 
         realm.commitTransaction();
 

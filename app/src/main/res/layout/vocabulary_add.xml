@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
+<layout>
+    <data>
+        <variable
+            name="vAdd"
+            type="com.example.jsy.wordapp.bind.VocabularyAddBind" />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -11,7 +13,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="戻る"
+            android:text="@{vAdd.topButton}"
             android:textSize="25dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
@@ -22,7 +24,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="単語帳・例文帳名"
+            android:text="@{vAdd.textView}"
             android:textSize="25dp"
             android:layout_marginTop="30dp"
             android:gravity="center"
@@ -40,12 +42,11 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="登録"
+            android:text="@{vAdd.bottomButton}"
             android:textSize="25dp"
             android:layout_gravity="right"
             android:layout_marginRight="20dp"
             android:onClick="vocabularySave"
             />
     </LinearLayout>
-
-</LinearLayout>
+</layout>

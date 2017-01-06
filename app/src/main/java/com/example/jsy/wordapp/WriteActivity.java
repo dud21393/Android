@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.EditText;
 
 import com.example.jsy.wordapp.m_realm.RealmHelper;
 
@@ -26,19 +25,6 @@ public class WriteActivity extends AppCompatActivity{
 
         realm = Realm.getDefaultInstance();
 
-        //もし、CategoryIdが、２より小さいとき使う。
-        //CategoryIdを作るため
-
-        //Categoryの、Record追加。
-        /*if( realm.where(Category.class).findAll().size() < 2 ){
-            Start_Category(Rh,realm);
-        }*/
-
-        //Category Delete Query
-        Rh.deleteQuery(realm);
-
-        //Recordが、入っているのかを確認するために使う、method。
-        //Rh.IngQuery(realm);
     }
 
     //Main画面に戻る時、使う。

@@ -1,12 +1,15 @@
 package com.example.jsy.wordapp;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.jsy.wordapp.bind.VocabularyAddBind;
+import com.example.jsy.wordapp.databinding.VocabularyAddBinding;
 import com.example.jsy.wordapp.m_realm.RealmHelper;
 
 import io.realm.Realm;
@@ -23,9 +26,11 @@ public class VocabularyAdd extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.vocabulary);
+        VocabularyAddBinding binding = DataBindingUtil.setContentView(this,R.layout.vocabulary_add);
+        VocabularyAddBind addBind = new VocabularyAddBind("戻る","単語帳・例文帳名","登録");
+        binding.setVAdd(addBind);
+        
         realm = Realm.getDefaultInstance();
-//        rh.deleteQuery(realm);
     }
 
     //단어장저장

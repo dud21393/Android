@@ -4,16 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.jsy.wordapp.m_realm.RealmHelper;
-import com.example.jsy.wordapp.m_realm.Sentence;
-
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 /**
  * Created by jsy on 2016-11-30.
