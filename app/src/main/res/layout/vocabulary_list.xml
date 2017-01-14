@@ -3,7 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,11 +14,20 @@
         android:onClick="backClick"
         />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/vocabularyLIst"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listView"
+        android:scrollbars="vertical"
         >
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/emptyText"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="データはありません。" >
+    </TextView>
 
 </LinearLayout>

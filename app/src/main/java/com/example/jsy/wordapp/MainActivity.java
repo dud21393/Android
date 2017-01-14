@@ -1,8 +1,8 @@
 package com.example.jsy.wordapp;
 
+import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.example.jsy.wordapp.bind.MainHandler;
 import com.example.jsy.wordapp.bind.MainBind;
@@ -10,7 +10,7 @@ import com.example.jsy.wordapp.databinding.MainActivityBinding;
 
 import io.realm.Realm;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

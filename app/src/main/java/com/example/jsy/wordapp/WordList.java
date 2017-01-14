@@ -1,17 +1,17 @@
 package com.example.jsy.wordapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.jsy.wordapp.recycle.RecyclerAdapter;
+import com.example.jsy.wordapp.recycle.WordRecyclerAdapter;
 import com.example.jsy.wordapp.recycle.WordItemList;
 import com.example.jsy.wordapp.m_realm.Category;
 import com.example.jsy.wordapp.m_realm.RealmHelper;
@@ -26,7 +26,7 @@ import io.realm.RealmResults;
  * Created by jsy on 2016-11-29.
  */
 
-public class WordList extends AppCompatActivity {
+public class WordList extends Activity {
     Context mainContext;
     Realm realm;
     RealmHelper rh = new RealmHelper();
@@ -43,7 +43,6 @@ public class WordList extends AppCompatActivity {
 
         Intent intent = getIntent();
         categoryId = intent.getIntExtra("categoryId", 999999999);
-
         if (categoryId != 999999999) {
             wordList();
         }
@@ -79,7 +78,7 @@ public class WordList extends AppCompatActivity {
 
                 list.add(wordItemList);
             }
-            rv.setAdapter(new RecyclerAdapter(list, R.layout.list_view));
+            rv.setAdapter(new WordRecyclerAdapter(list, R.layout.list_view));
             rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         }else{
             rv.setVisibility(View.GONE);

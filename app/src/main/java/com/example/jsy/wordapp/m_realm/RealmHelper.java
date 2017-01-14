@@ -1,7 +1,6 @@
 package com.example.jsy.wordapp.m_realm;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import io.realm.Realm;
 import io.realm.RealmResults;

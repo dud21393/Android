@@ -8,11 +8,19 @@ public class VocabularyAddBind {
     private static String topButton;
     private static String bottomButton;
     private static String textView;
+    private String vocabularyName;
 
     public VocabularyAddBind(String topButton, String bottomButton, String textView){
         this.topButton = topButton;
         this.bottomButton = bottomButton;
         this.textView = textView;
+    }
+
+    public String getVocabularyName() {
+        return vocabularyName;
+    }
+    public void setVocabularyName(String vocabularyName) {
+        this.vocabularyName = vocabularyName;
     }
 
     public String getTopButton(){

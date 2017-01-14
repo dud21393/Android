@@ -1,10 +1,10 @@
 package com.example.jsy.wordapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,7 +21,7 @@ import io.realm.RealmResults;
  * Created by jsy on 2016-12-15.
  */
 
-public class WordTest extends AppCompatActivity {
+public class WordTest extends Activity {
     Realm realm;
     RealmHelper rh = new RealmHelper();
     int categoryId;

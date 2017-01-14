@@ -1,8 +1,8 @@
 package com.example.jsy.wordapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.jsy.wordapp.m_realm.RealmHelper;
@@ -13,7 +13,7 @@ import io.realm.Realm;
  * Created by jsy on 2016-11-08.
  */
 
-public class WriteActivity extends AppCompatActivity{
+public class WriteActivity extends Activity {
 
     Realm realm;
     RealmHelper Rh = new RealmHelper();

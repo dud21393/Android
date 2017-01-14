@@ -11,12 +11,12 @@ import com.example.jsy.wordapp.R;
 
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
+public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapter.ViewHolder>{
 
     private List<WordItemList> itemList;
     private int itemLayout;
 
-    public RecyclerAdapter(List<WordItemList> items,int itemLayout){
+    public WordRecyclerAdapter(List<WordItemList> items, int itemLayout){
         this.itemList = items;
         this.itemLayout = itemLayout;
     }

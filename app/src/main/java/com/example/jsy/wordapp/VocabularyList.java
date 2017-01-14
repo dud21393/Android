@@ -1,16 +1,23 @@
 package com.example.jsy.wordapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.jsy.wordapp.m_realm.Category;
 import com.example.jsy.wordapp.m_realm.RealmHelper;
+import com.example.jsy.wordapp.recycle.VocabularyRecyclerAdapter;
+import com.example.jsy.wordapp.recycle.VocabularyItemList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -19,14 +26,11 @@ import io.realm.RealmResults;
  * Created by jsy on 2016-11-22.
  */
 
-public class VocabularyList extends AppCompatActivity {
+public class VocabularyList extends Activity {
     Realm realm;
     RealmHelper Rh = new RealmHelper();
     private RealmResults<Category> result;
     ListView lv;
-
-    String[] items;
-    int[] categoryIds;
 
 
     @Override
@@ -43,32 +47,33 @@ public class VocabularyList extends AppCompatActivity {
     }
 
     public void vocabularyList(){
-        int categoryNum = result.size();
+        int count = result.size();
 
-        items = new String[categoryNum];
-        categoryIds = new int[categoryNum];
+        RecyclerView rv;
+        TextView empty = (TextView) findViewById(R.id.emptyText);
 
-        for(int iCount=0; iCount<categoryNum; iCount++)
+        rv = (RecyclerView) findViewById(R.id.vocabularyLIst);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(llm);
+        rv.setItemAnimator(new DefaultItemAnimator());
+
+        List<VocabularyItemList> list = new ArrayList<VocabularyItemList>();
+
+
+        for(int iCount=0; iCount<count; iCount++)
         {
-            items[iCount] = result.get(iCount).getCategoryName();
-            categoryIds[iCount] = result.get(iCount).getCategoryId();
-        }
+            VocabularyItemList vocabularyItemList = new VocabularyItemList();
 
-        lv = (ListView)findViewById(R.id.listView);
+            String categoryName = result.get(iCount).getCategoryName();
+            int categoryId = result.get(iCount).getCategoryId();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,items);
-        lv.setAdapter(adapter);
-        registerForContextMenu(lv);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //WordListClassに移動
-                Intent intent = new Intent(getApplicationContext(),WordList.class);
-                intent.putExtra("categoryId",categoryIds[position]);
-                startActivity(intent);
-            }
+            vocabularyItemList.setVocalbularyName(categoryName);
+            vocabularyItemList.setVocalbularyId(categoryId);
+            list.add(vocabularyItemList);
         }
-        );
+        rv.setAdapter(new VocabularyRecyclerAdapter(list,R.layout.vocabulary_recycler_view));
+        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 
     //Main画面に戻る時、使う。
