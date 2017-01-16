@@ -3,6 +3,7 @@ package com.example.jsy.wordapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.jsy.wordapp.bind.WordListBind;
+import com.example.jsy.wordapp.databinding.WordListBinding;
 import com.example.jsy.wordapp.recycle.WordRecyclerAdapter;
 import com.example.jsy.wordapp.recycle.WordItemList;
 import com.example.jsy.wordapp.m_realm.Category;
@@ -27,17 +30,18 @@ import io.realm.RealmResults;
  */
 
 public class WordList extends Activity {
-    Context mainContext;
     Realm realm;
     RealmHelper rh = new RealmHelper();
     private RealmResults<Category> result;
     int categoryId;
-    List<Integer> count = null;
+    WordListBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.word_list);
+        binding = DataBindingUtil.setContentView(this, R.layout.word_list);
+        WordListBind wordListBind = new WordListBind("戻る", "テスト", "単語帳・例文帳一覧", "+", "単語データはありません。");
+        binding.setWList(wordListBind);
 
         realm = Realm.getDefaultInstance();
 
@@ -57,9 +61,9 @@ public class WordList extends Activity {
 
         RecyclerView rv;
 
-        TextView empty = (TextView) findViewById(R.id.emptyText);
+        TextView empty = binding.emptyText;
 
-        rv = (RecyclerView) findViewById(R.id.wordList);
+        rv = binding.wordList;
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
@@ -80,7 +84,7 @@ public class WordList extends Activity {
             }
             rv.setAdapter(new WordRecyclerAdapter(list, R.layout.list_view));
             rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        }else{
+        } else {
             rv.setVisibility(View.GONE);
             empty.setVisibility(View.VISIBLE);
         }
@@ -88,26 +92,25 @@ public class WordList extends Activity {
 
     //+를 눌렀을때 단어추가화면으로 넘어감
     //＋をクリクした時、WordAddに移動
-    public void wordAdd(View v){
-        Intent intent = new Intent(this,WordAdd.class);
-        intent.putExtra("categoryId",categoryId);
+    public void wordAdd(View v) {
+        Intent intent = new Intent(this, WordAdd.class);
+        intent.putExtra("categoryId", categoryId);
         startActivity(intent);
     }
 
     //Main画面に戻る時、使う。
-    public void backClick(View v){
-        Intent vocabularyList = new Intent(this,VocabularyList.class);
+    public void backClick(View v) {
+        Intent vocabularyList = new Intent(this, VocabularyList.class);
         startActivity(vocabularyList);
     }
 
     //TEST버튼을 눌렀을때 WordTest로 이동
     //テストボタンをクリクした時、WordTestに移動
-    public void testClick(View v){
-        Intent wordTest = new Intent(this,WordTest.class);
-        wordTest.putExtra("categoryId",categoryId);
+    public void testClick(View v) {
+        Intent wordTest = new Intent(this, WordTest.class);
+        wordTest.putExtra("categoryId", categoryId);
         startActivity(wordTest);
     }
-
 
 
 }

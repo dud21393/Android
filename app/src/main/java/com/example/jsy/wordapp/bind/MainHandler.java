@@ -15,19 +15,17 @@ import com.example.jsy.wordapp.VocabularyList;
 public class MainHandler extends Activity {
     //단어장저장화면으로이동
     //単語帳のsave画面に移動
-    public void vocabularySave(View v)
-    {
+    public void vocabularySave(View v) {
         Context context = v.getContext();
-        Intent intent = new Intent(context,VocabularyAdd.class);
+        Intent intent = new Intent(context, VocabularyAdd.class);
         context.startActivity(intent);
     }
 
     //단어장리스트로 이동
     //単語帳のリストに移動
-    public void vocabularyList(View v)
-    {
+    public void vocabularyList(View v) {
         Context context = v.getContext();
-        Intent intent = new Intent(context,VocabularyList.class);
+        Intent intent = new Intent(context, VocabularyList.class);
         context.startActivity(intent);
     }
 

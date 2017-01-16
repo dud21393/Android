@@ -7,13 +7,13 @@ import io.realm.RealmResults;
 
 public class RealmHelper {
 
-    public void saveVocabulary(Realm realm,String categoryName){
+    public void saveVocabulary(Realm realm, String categoryName) {
 
         realm.beginTransaction();
         int categoryId;
         try {
-            categoryId = realm.where(Category.class).max("CategoryId").intValue()+1;
-        } catch(Exception ex) {
+            categoryId = realm.where(Category.class).max("CategoryId").intValue() + 1;
+        } catch (Exception ex) {
             categoryId = 1;
         }
 
@@ -23,7 +23,7 @@ public class RealmHelper {
         try {
             Category category = realm.createObject(Category.class, categoryId);
             category.setCategoryName(categoryName);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             CategoryInsert ci = new CategoryInsert();
             ci.foo();
         }
@@ -32,14 +32,14 @@ public class RealmHelper {
 
     }
 
-    public void saveWord(Realm realm,  String japaneseWord,  String koreanWord,  int categoryId){
+    public void saveWord(Realm realm, String japaneseWord, String koreanWord, int categoryId) {
 
         realm.beginTransaction();
         int sentenceId;
 
         try {
-            sentenceId = realm.where(Sentence.class).max("SentenceId").intValue()+1;
-        } catch(Exception ex) {
+            sentenceId = realm.where(Sentence.class).max("SentenceId").intValue() + 1;
+        } catch (Exception ex) {
             sentenceId = 1;
         }
 
@@ -49,7 +49,7 @@ public class RealmHelper {
             sentence.setKoreanSentence(koreanWord);
             sentence.setJapaneseSentence(japaneseWord);
             category.getSentences().add(sentence);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             SentenceInsert si = new SentenceInsert();
             si.foo();
         }
@@ -58,7 +58,7 @@ public class RealmHelper {
 
     }
 
-    public RealmResults<Category> vocabularyList(Realm realm){
+    public RealmResults<Category> vocabularyList(Realm realm) {
 
         RealmResults<Category> ct = realm.where(Category.class).findAll();
 
@@ -66,34 +66,34 @@ public class RealmHelper {
 
     }
 
-    public void ingQuery(Realm realm){
+    public void ingQuery(Realm realm) {
 
         RealmResults<Category> ct = realm.where(Category.class).findAll();
         Log.d("num", String.valueOf(ct.size()));
 
     }
 
-    public void deleteQuery(Realm realm){
+    public void deleteQuery(Realm realm) {
         final RealmResults<Category> ct = realm.where(Category.class).findAll();
-        realm.executeTransaction(new Realm.Transaction(){
+        realm.executeTransaction(new Realm.Transaction() {
             @Override
-            public void execute(Realm realm){
+            public void execute(Realm realm) {
                 ct.get(0).deleteFromRealm();
             }
         });
         final RealmResults<Sentence> st = realm.where(Sentence.class).findAll();
-        realm.executeTransaction(new Realm.Transaction(){
+        realm.executeTransaction(new Realm.Transaction() {
             @Override
-            public void execute(Realm realm){
+            public void execute(Realm realm) {
                 st.get(0).deleteFromRealm();
             }
         });
     }
 
-    public RealmResults<Category> wordList(Realm realm,int categoryId){
-        
+    public RealmResults<Category> wordList(Realm realm, int categoryId) {
+
         RealmResults<Category> ct = realm.where(Category.class)
-                .equalTo("CategoryId",categoryId)
+                .equalTo("CategoryId", categoryId)
                 .findAll();
 
         return ct;

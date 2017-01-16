@@ -22,12 +22,13 @@ public class VocabularyAdd extends Activity {
 
     Realm realm;
     RealmHelper rh = new RealmHelper();
+    VocabularyAddBinding binding;
 
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        VocabularyAddBinding binding = DataBindingUtil.setContentView(this,R.layout.vocabulary_add);
-        VocabularyAddBind addBind = new VocabularyAddBind("戻る","単語帳・例文帳名","登録");
+        binding = DataBindingUtil.setContentView(this, R.layout.vocabulary_add);
+        VocabularyAddBind addBind = new VocabularyAddBind("戻る", "単語帳・例文帳名", "登録");
         binding.setVAdd(addBind);
 
         realm = Realm.getDefaultInstance();
@@ -35,11 +36,11 @@ public class VocabularyAdd extends Activity {
 
     //단어장저장
     //単語帳save
-    public void vocabularySave(View v){
-        EditText vbName = (EditText)findViewById(R.id.vocabularyName);
-        if(vbName.getText().toString().equals("")){
-            Toast.makeText(VocabularyAdd.this,"ちゃんと書いてください。",Toast.LENGTH_SHORT).show();
-        }else {
+    public void vocabularySave(View v) {
+        EditText vbName = binding.vocabularyName;
+        if (vbName.getText().toString().equals("")) {
+            Toast.makeText(VocabularyAdd.this, "ちゃんと書いてください。", Toast.LENGTH_SHORT).show();
+        } else {
             rh.saveVocabulary(realm, vbName.getText().toString());
             Toast.makeText(VocabularyAdd.this, "Saveしました。", Toast.LENGTH_SHORT).show();
             Intent vocalbularyList = new Intent(this, VocabularyList.class);
@@ -48,8 +49,8 @@ public class VocabularyAdd extends Activity {
     }
 
     //Main画面に戻る時、使う。
-    public void backClick(View v){
-        Intent mainView = new Intent(this,MainActivity.class);
+    public void backClick(View v) {
+        Intent mainView = new Intent(this, MainActivity.class);
         startActivity(mainView);
     }
 

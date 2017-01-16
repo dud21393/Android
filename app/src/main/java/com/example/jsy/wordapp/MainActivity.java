@@ -10,14 +10,14 @@ import com.example.jsy.wordapp.databinding.MainActivityBinding;
 
 import io.realm.Realm;
 
-public class MainActivity extends Activity{
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MainActivityBinding binding = DataBindingUtil.setContentView(this,R.layout.main_activity);
+        MainActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
 
-        MainBind mainBinding = new MainBind("単語帳作る","単語帳見る");
+        MainBind mainBinding = new MainBind("単語帳作る", "単語帳見る");
         MainHandler mainHandler = new MainHandler();
 
         binding.setMain(mainBinding);

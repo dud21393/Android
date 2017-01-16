@@ -10,7 +10,7 @@ public class VocabularyAddBind {
     private static String textView;
     private String vocabularyName;
 
-    public VocabularyAddBind(String topButton, String bottomButton, String textView){
+    public VocabularyAddBind(String topButton, String bottomButton, String textView) {
         this.topButton = topButton;
         this.bottomButton = bottomButton;
         this.textView = textView;
@@ -19,17 +19,20 @@ public class VocabularyAddBind {
     public String getVocabularyName() {
         return vocabularyName;
     }
+
     public void setVocabularyName(String vocabularyName) {
         this.vocabularyName = vocabularyName;
     }
 
-    public String getTopButton(){
+    public String getTopButton() {
         return this.topButton;
     }
-    public String getBottomButton(){
+
+    public String getBottomButton() {
         return this.bottomButton;
     }
-    public String getTextView(){
+
+    public String getTextView() {
         return this.textView;
     }
 

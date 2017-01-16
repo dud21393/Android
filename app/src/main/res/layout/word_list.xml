@@ -1,87 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_light"
-    android:orientation="vertical">
+<layout>
+    <data>
+        <variable
+            name="wList"
+            type="com.example.jsy.wordapp.bind.WordListBind" />
+    </data>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="2">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:onClick="backClick"
-            android:text="戻る"
-            android:textSize="25dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:text="単語帳・例文帳一覧"
-            android:textSize="15dp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:onClick="testClick"
-            android:text="テスト"
-            android:textSize="20dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutView"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:background="@android:color/white"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_orange_light"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/wordList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            >
-        </android.support.v7.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/emptyText"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="単語データはありません。" >
-        </TextView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:gravity="right">
-
-        <Button
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/shape"
-            android:onClick="wordAdd"
-            android:text="+"
-            android:textColor="@android:color/black"
-            android:textSize="50dp" />
-    </LinearLayout>
+            android:layout_height="0dp"
+            android:layout_weight="2">
 
-</LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="20dp"
+                android:onClick="backClick"
+                android:text="@{wList.topLeftButton}"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@{wList.topText}"
+                android:textSize="15dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:onClick="testClick"
+                android:text="@{wList.topRightButton}"
+                android:textSize="20dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/wordList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/emptyText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@{wList.emptyText}"></TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="right">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/shape"
+                android:onClick="wordAdd"
+                android:text="@{wList.bottomButton}"
+                android:textColor="@android:color/black"
+                android:textSize="50dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

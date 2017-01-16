@@ -6,17 +6,17 @@ package com.example.jsy.wordapp.m_realm;
 
 public class MyClass {
 
-    public interface MyClassCallbacks{
+    public interface MyClassCallbacks {
         public void callbackMethod();
     }
 
     private MyClassCallbacks myClassCallbacks;
 
-    public void setCallbacks(MyClassCallbacks myClassCallbacks){
+    public void setCallbacks(MyClassCallbacks myClassCallbacks) {
         this.myClassCallbacks = myClassCallbacks;
     }
 
-    public void method(){
+    public void method() {
         myClassCallbacks.callbackMethod();
     }
 }

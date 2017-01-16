@@ -2,13 +2,16 @@ package com.example.jsy.wordapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.jsy.wordapp.bind.WordTestBind;
+import com.example.jsy.wordapp.databinding.WordTestBinding;
 import com.example.jsy.wordapp.m_realm.Category;
 import com.example.jsy.wordapp.m_realm.RealmHelper;
 
@@ -27,8 +30,10 @@ public class WordTest extends Activity {
     int categoryId;
     private RealmResults<Category> result;
     int count;
-    ViewPager pager;
     Vector<String> vector;
+    WordTestBinding binding;
+    TextView text;
+    int num;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +43,9 @@ public class WordTest extends Activity {
         Intent intent = getIntent();
         categoryId = intent.getIntExtra("categoryId", 999999999);
 
-        setContentView(R.layout.word_test);
+        binding = DataBindingUtil.setContentView(this,R.layout.word_test);
+        WordTestBind wordTestBind = new WordTestBind("戻る","PREV","NEXT");
+        binding.setWTest(wordTestBind);
 
         test();
     }
@@ -46,7 +53,7 @@ public class WordTest extends Activity {
     //Test List作る。
     public void test() {
         result = rh.wordList(realm, categoryId);
-        int num = result.get(0).getSentences().size();
+        num = result.get(0).getSentences().size();
         count = 0;
 
         //Vectorを利用して、配列を作る。
@@ -57,25 +64,36 @@ public class WordTest extends Activity {
             vector.addElement(result.get(0).getSentences().get(iCount).getKoreanSentence());
         }
 
-        final TextView text = (TextView) findViewById(R.id.textView);
-        Button prev = (Button) findViewById(R.id.preClick);
-        Button next = (Button) findViewById(R.id.nextClick);
+        text = binding.textView;
+        Button prev = binding.preClick;
+        Button next = binding.nextClick;
         text.setText(vector.get(count));
 
         prev.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                count--;
-                text.setText(vector.get(count));
+                if(count > 0){
+                    count--;
+                    text.setText(vector.get(count));
+                }else{
+                    Toast.makeText(WordTest.this, "最初の単語です。", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
         next.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                count++;
-                text.setText(vector.get(count));
+                if(count < num){
+                    count++;
+                    text.setText(vector.get(count));
+                }else{
+                    Toast.makeText(WordTest.this, "最後の単語です。", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
 
-
+    public void backClick(View v){
+        Intent vocabularyList = new Intent(this, WordList.class);
+        vocabularyList.putExtra("categoryId",categoryId);
+        startActivity(vocabularyList);
     }
 }
