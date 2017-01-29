@@ -81,7 +81,7 @@ public class WordTest extends Activity {
         });
         next.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                if(count < num){
+                if(count <= num){
                     count++;
                     text.setText(vector.get(count));
                 }else{

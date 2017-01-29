@@ -17,8 +17,6 @@ public class RealmHelper {
             categoryId = 1;
         }
 
-        Log.d("categoryId", String.valueOf(realm.where(Category.class).max("CategoryId").intValue()));
-
         //Category Insertが失敗した時。
         try {
             Category category = realm.createObject(Category.class, categoryId);
