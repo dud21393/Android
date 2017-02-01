@@ -1,9 +1,6 @@
 package com.example.jsy.wordapp;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.tool.DataBindingBuilder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,7 +11,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.jsy.wordapp.bind.VocabularyListBind;
-import com.example.jsy.wordapp.bind.WordAddBind;
 import com.example.jsy.wordapp.databinding.VocabularyListBinding;
 import com.example.jsy.wordapp.m_realm.Category;
 import com.example.jsy.wordapp.m_realm.RealmHelper;
@@ -31,11 +27,10 @@ import io.realm.RealmResults;
  * Created by jsy on 2016-11-22.
  */
 
-public class VocabularyList extends Activity {
+public class VocabularyList extends WordAbstact {
     Realm realm;
-    RealmHelper Rh = new RealmHelper();
+    RealmHelper rh = new RealmHelper();
     private RealmResults<Category> result;
-    ListView lv;
     VocabularyListBinding binding;
 
 
@@ -48,7 +43,7 @@ public class VocabularyList extends Activity {
         binding.setVList(vocabularyListBind);
 
         realm = Realm.getDefaultInstance();
-        result = Rh.vocabularyList(realm);
+        result = rh.vocabularyList(realm);
 
         vocabularyList();
     }
@@ -57,7 +52,6 @@ public class VocabularyList extends Activity {
         int count = result.size();
 
         RecyclerView rv;
-        TextView empty = binding.emptyText;
 
         rv = binding.vocabularyLIst;
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -84,8 +78,7 @@ public class VocabularyList extends Activity {
 
     //Main画面に戻る時、使う。
     public void backClick(View v) {
-        Intent mainView = new Intent(this, MainActivity.class);
-        startActivity(mainView);
+        finish();
     }
 
 

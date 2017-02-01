@@ -1,7 +1,5 @@
 package com.example.jsy.wordapp;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -29,7 +27,7 @@ import io.realm.RealmResults;
  * Created by jsy on 2016-11-29.
  */
 
-public class WordList extends Activity {
+public class WordList extends WordAbstact {
     Realm realm;
     RealmHelper rh = new RealmHelper();
     private RealmResults<Category> result;
@@ -100,8 +98,7 @@ public class WordList extends Activity {
 
     //Main画面に戻る時、使う。
     public void backClick(View v) {
-        Intent vocabularyList = new Intent(this, VocabularyList.class);
-        startActivity(vocabularyList);
+        finish();
     }
 
     //TEST버튼을 눌렀을때 WordTest로 이동

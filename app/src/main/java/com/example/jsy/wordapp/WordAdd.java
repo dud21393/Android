@@ -1,6 +1,5 @@
 package com.example.jsy.wordapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -19,9 +18,9 @@ import io.realm.Realm;
  * Created by jsy on 2016-11-30.
  */
 
-public class WordAdd extends Activity {
+public class WordAdd extends WordAbstact {
     Realm realm;
-    RealmHelper Rh = new RealmHelper();
+    RealmHelper rh = new RealmHelper();
     WordAddBinding binding;
     int categoryId;
 
@@ -48,7 +47,7 @@ public class WordAdd extends Activity {
             Toast.makeText(WordAdd.this, "ちゃんと書いてください。", Toast.LENGTH_SHORT).show();
         } else {
             if (categoryId != 999999999) {
-                Rh.saveWord(realm, Japanese_Word.getText().toString(), Korean_word.getText().toString(), categoryId);
+                rh.saveWord(realm, Japanese_Word.getText().toString(), Korean_word.getText().toString(), categoryId);
                 Toast.makeText(WordAdd.this, "Saveしました。", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, WordList.class);
                 intent.putExtra("categoryId", categoryId);
@@ -63,8 +62,6 @@ public class WordAdd extends Activity {
 
     //Main画面に戻る時、使う。
     public void backClick(View v) {
-        Intent mainView = new Intent(this, WordList.class);
-        mainView.putExtra("categoryId",categoryId);
-        startActivity(mainView);
+        finish();
     }
 }

@@ -1,10 +1,8 @@
 package com.example.jsy.wordapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,7 +17,7 @@ import io.realm.Realm;
  * Created by jsy on 2016-11-21.
  */
 
-public class VocabularyAdd extends Activity {
+public class VocabularyAdd extends WordAbstact {
 
     Realm realm;
     RealmHelper rh = new RealmHelper();
@@ -51,8 +49,7 @@ public class VocabularyAdd extends Activity {
 
     //Main画面に戻る時、使う。
     public void backClick(View v) {
-        Intent mainView = new Intent(this, MainActivity.class);
-        startActivity(mainView);
+        finish();
     }
 
 

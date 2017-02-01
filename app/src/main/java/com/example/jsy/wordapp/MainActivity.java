@@ -1,6 +1,5 @@
 package com.example.jsy.wordapp;
 
-import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
@@ -10,7 +9,7 @@ import com.example.jsy.wordapp.databinding.MainActivityBinding;
 
 import io.realm.Realm;
 
-public class MainActivity extends Activity {
+public class MainActivity extends WordAbstact {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

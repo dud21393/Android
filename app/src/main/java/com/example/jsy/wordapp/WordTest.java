@@ -1,6 +1,5 @@
 package com.example.jsy.wordapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -24,7 +23,7 @@ import io.realm.RealmResults;
  * Created by jsy on 2016-12-15.
  */
 
-public class WordTest extends Activity {
+public class WordTest extends WordAbstact {
     Realm realm;
     RealmHelper rh = new RealmHelper();
     int categoryId;
@@ -92,8 +91,6 @@ public class WordTest extends Activity {
     }
 
     public void backClick(View v){
-        Intent vocabularyList = new Intent(this, WordList.class);
-        vocabularyList.putExtra("categoryId",categoryId);
-        startActivity(vocabularyList);
+        finish();
     }
 }
