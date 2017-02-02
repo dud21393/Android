@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.example.jsy.wordapp.bind.WordTestBind;
 import com.example.jsy.wordapp.databinding.WordTestBinding;
 import com.example.jsy.wordapp.m_realm.Category;
-import com.example.jsy.wordapp.m_realm.RealmHelper;
 
 import java.util.Vector;
 
@@ -24,8 +23,6 @@ import io.realm.RealmResults;
  */
 
 public class WordTest extends WordAbstact {
-    Realm realm;
-    RealmHelper rh = new RealmHelper();
     int categoryId;
     private RealmResults<Category> result;
     int count;

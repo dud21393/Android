@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.example.jsy.wordapp.bind.WordAddBind;
 import com.example.jsy.wordapp.databinding.WordAddBinding;
-import com.example.jsy.wordapp.m_realm.RealmHelper;
 
 import io.realm.Realm;
 
@@ -19,8 +18,6 @@ import io.realm.Realm;
  */
 
 public class WordAdd extends WordAbstact {
-    Realm realm;
-    RealmHelper rh = new RealmHelper();
     WordAddBinding binding;
     int categoryId;
 

@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.example.jsy.wordapp.bind.VocabularyAddBind;
 import com.example.jsy.wordapp.databinding.VocabularyAddBinding;
-import com.example.jsy.wordapp.m_realm.RealmHelper;
 
 import io.realm.Realm;
 
@@ -18,9 +17,6 @@ import io.realm.Realm;
  */
 
 public class VocabularyAdd extends WordAbstact {
-
-    Realm realm;
-    RealmHelper rh = new RealmHelper();
     VocabularyAddBinding binding;
 
     public void onCreate(Bundle savedInstanceState) {

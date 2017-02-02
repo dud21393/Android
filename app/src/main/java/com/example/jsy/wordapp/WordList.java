@@ -15,7 +15,6 @@ import com.example.jsy.wordapp.databinding.WordListBinding;
 import com.example.jsy.wordapp.recycle.WordRecyclerAdapter;
 import com.example.jsy.wordapp.recycle.WordItemList;
 import com.example.jsy.wordapp.m_realm.Category;
-import com.example.jsy.wordapp.m_realm.RealmHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +27,6 @@ import io.realm.RealmResults;
  */
 
 public class WordList extends WordAbstact {
-    Realm realm;
-    RealmHelper rh = new RealmHelper();
     private RealmResults<Category> result;
     int categoryId;
     WordListBinding binding;

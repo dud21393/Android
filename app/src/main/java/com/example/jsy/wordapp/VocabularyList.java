@@ -7,13 +7,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.jsy.wordapp.bind.VocabularyListBind;
 import com.example.jsy.wordapp.databinding.VocabularyListBinding;
 import com.example.jsy.wordapp.m_realm.Category;
-import com.example.jsy.wordapp.m_realm.RealmHelper;
 import com.example.jsy.wordapp.recycle.VocabularyRecyclerAdapter;
 import com.example.jsy.wordapp.recycle.VocabularyItemList;
 
@@ -28,8 +25,6 @@ import io.realm.RealmResults;
  */
 
 public class VocabularyList extends WordAbstact {
-    Realm realm;
-    RealmHelper rh = new RealmHelper();
     private RealmResults<Category> result;
     VocabularyListBinding binding;
 
